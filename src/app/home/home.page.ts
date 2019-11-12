@@ -1,5 +1,4 @@
 import { AlertController } from '@ionic/angular';
-import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { Component, OnInit, NgZone, ViewChild, asNativeElements} from '@angular/core';
@@ -20,17 +19,19 @@ import {
 import { Icon } from 'ionicons/dist/types/icon/icon';
 import { PopupPage } from '../popup/popup.page';
 import { ReportedIncidentPage } from '../reported-incident/reported-incident.page'
-import { FirebaseService } from '../firebase.service';
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+// import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 //import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { GooglemapService } from '../googlemap.service';
+// import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 ///
 // import { TextInput } from 'ionic-angular';
 
 import { IonInput } from '@ionic/angular';
+import { UsersService } from '../services/users/users.service';
+import { GoogleMapsService } from '../services/google-maps/google-maps.service';
+import { GetReportsService } from '../services/reports/get-reports/get-reports.service';
+import { SetReportsService } from '../services/reports/set-reports/set-reports.service';
 
 declare var H: any;
 
@@ -104,7 +105,7 @@ export class HomePage implements OnInit  {
   showMe = false
 
   constructor(public zone: NgZone,public alertController: AlertController, private localNotifications: LocalNotifications, public userService : UsersService, public router : Router, public events : Events,  public toastCtrl: ToastController,
-    private platform: Platform, public modal : ModalController, public firebaseService : FirebaseService,public  socialSharing: SocialSharing, private keyboard: Keyboard, public googlemapservice : GooglemapService) 
+    private platform: Platform, public modal : ModalController                                                                ,public  socialSharing: SocialSharing, private keyboard: Keyboard, public googlemapservice : GoogleMapsService, public getReportsService : GetReportsService, public setReportsService : SetReportsService) 
     {
     //this.exit()
     this.checkUserState()
@@ -476,7 +477,7 @@ console.log("hh")
   }
   async loadLocations(){
     let result :any
-    await this.firebaseService.fetchSavedLocations().then(data =>{
+    await this.getReportsService.fetchSavedLocations().then(data =>{
       result = data
       this.highRiskLocations = data
       console.log(this.highRiskLocations);
@@ -488,7 +489,7 @@ console.log("hh")
   }
   async loadUserIncidents(){
     let result :any
-    await this.firebaseService.fetchUserIncidents().then(data => {
+    await this.getReportsService.fetchUserIncidents().then(data => {
       result = data
       console.log(result);
       
@@ -499,7 +500,7 @@ console.log("hh")
     return  result
   }
   fetchCrimeCategories(){
-    this.firebaseService.fetchCrimeCategories().then(data => {
+    this.getReportsService.fetchCrimeCategories().then(data => {
       this.result = data
       console.log(this.result);
     })
@@ -569,19 +570,19 @@ console.log("hh")
         let date = Date()
         console.log(date);
         
-        await this.firebaseService.submit(submitInfo).then(data => {
+        await this.setReportsService.submit(submitInfo).then(data => {
           console.log(data);
           this.succesfulSubmission()
           
         })
 
-        // this.firebaseService.checkHighRisks(submitInfo).then(data => {
+        // this.getReportsService.checkHighRisks(submitInfo).then(data => {
         //   console.log(data)
         //   let sendToHighRisks = data
         //   if(sendToHighRisks === true){
-        //     this.firebaseService.submitToHighRisk(submitInfo)
+        //     this.setReportsService.submitToHighRisk(submitInfo)
         //   }else{
-        //     this.firebaseService.checkIncidents(submitInfo).then(result => {
+        //     this.getReportsService.checkIncidents(submitInfo).then(result => {
         //       console.log(result);
         //       let sendToIncidents = result[0].submit
         //       let key = result[0].incidentKey
@@ -591,16 +592,16 @@ console.log("hh")
         //         console.log(key);
         //         console.log(numberOfReports);
         //         if(numberOfReports > 3){
-        //           this.firebaseService.submitToHighRisk(submitInfo)
+        //           this.setReportsService.submitToHighRisk(submitInfo)
         //         }else{
-        //           this.firebaseService.submitToOldIncidents(submitInfo, key, numberOfReports).then(result => {
+        //           this.setReportsService.submitToOldIncidents(submitInfo, key, numberOfReports).then(result => {
 
         //           })
         //         }
         //       }else{
         //         console.log('adding to new incidents');
                 
-        //         this.firebaseService.submitNew(submitInfo)
+        //         this.setReportsService.submitNew(submitInfo)
         //       }
         //     })
         //   }

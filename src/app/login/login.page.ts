@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../users.service';
 import { AlertController, Events } from '@ionic/angular';
 import { Router } from '@angular/router'
 import {FormBuilder, Validators} from '@angular/forms';
+import { UsersService } from '../services/users/users.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -10,11 +10,11 @@ import {FormBuilder, Validators} from '@angular/forms';
 })
 export class LoginPage implements OnInit {
   email: string
-  password: string
+password: string
   emailPattern : string = "[a-zA-Z0-9-_.+#$!=%^&*/?]+[@][a-zA-Z0-9-]+[.][a-zA-Z0-9]+"
   passwordPattern = "^(?=.*\[0-9])(?=.*\[a-z])(?=.*\[A-Z])(?=.*\[@#$!%^&*,.<>]).{8,}$"
   loginForm
-  constructor(
+constructor(  
     public userService: UsersService,
     public alertController: AlertController,
     public route: Router,

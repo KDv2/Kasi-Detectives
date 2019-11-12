@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../users.service';
 import {FormBuilder, Validators} from '@angular/forms'
 import { Router } from '@angular/router'
 import { AlertController, Events } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { NavigationService } from '../navigation.service';
+import { UsersService } from '../services/users/users.service';
 
 @Component({
   selector: 'app-registration',

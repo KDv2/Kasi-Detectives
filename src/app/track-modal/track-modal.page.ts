@@ -7,10 +7,10 @@ import { filter } from 'minimatch';
 import { interval } from 'rxjs'
 ​​import { SMS } from '@ionic-native/sms/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { UsersService } from '../users.service';
 import { Contacts, ContactFieldType,IContactFindOptions } from '@ionic-native/contacts/ngx';
 import { LoadingController } from '@ionic/angular';
 import * as firebase from 'firebase'
+import { UsersService } from '../services/users/users.service';
 var database = firebase.database();
 declare var google
 @Component({
@@ -38,7 +38,7 @@ export class TrackModalPage implements OnInit {
   theContactNumber
   lastLocation
   loc
-  constructor(public loadingController: LoadingController,public contacts: Contacts, public userService: UsersService,private androidPermissions: AndroidPermissions,private sms: SMS,private socialSharing: SocialSharing,public navCtrl: NavController, private plt: Platform, private geolocation: Geolocation) {
+  constructor(public loadingController: LoadingController,public contacts: Contacts, public userService: UsersService, private androidPermissions: AndroidPermissions,private sms: SMS,private socialSharing: SocialSharing,public navCtrl: NavController, private plt: Platform, private geolocation: Geolocation) {
    //this.search('');
     this.geocoder = new google.maps.Geocoder;
     this.retrieveUserID()

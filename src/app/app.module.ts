@@ -22,17 +22,18 @@ import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native
 import { SMS } from '@ionic-native/sms/ngx';
 import {Contacts,ContactFieldType, IContactFindOptions } from '@ionic-native/contacts/ngx';
 var firebaseConfig = {
-  apiKey: "AIzaSyAqj9dyDMnp_Yjb2JiSr899kubQBx3dzbI",
-  authDomain: "kasidetectives.firebaseapp.com",
-  databaseURL: "https://kasidetectives.firebaseio.com",
-  projectId: "kasidetectives",
-  
-  storageBucket: "kasidetectives.appspot.com",
-  messagingSenderId: "207670776123",
-  appId: "1:207670776123:web:b1f7be1f7bb88f7d70271e"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyAIvPu8kmlxGnWsGd8kekx5ts7TRnqv8mk",
+    authDomain: "kasi-detectives-v2.firebaseapp.com",
+    databaseURL: "https://kasi-detectives-v2.firebaseio.com",
+    projectId: "kasi-detectives-v2",
+    storageBucket: "kasi-detectives-v2.appspot.com",
+    messagingSenderId: "332597753588",
+    appId: "1:332597753588:web:07be8a011678e4d67090a1",
+    measurementId: "G-Y24B0V4XD4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
 
 @NgModule({
   declarations: [AppComponent],

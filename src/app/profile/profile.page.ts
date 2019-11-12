@@ -3,9 +3,9 @@ import { ToastController, Events, ActionSheetController, LoadingController, Aler
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { UsersService } from '../users.service';
 ​
 import { File } from '@ionic-native/file/ngx';
+import { UsersService } from '../services/users/users.service';
 ​
 ​
 @Component({
@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
   image: any;
   secImage
 ​
-  constructor(public alertController: AlertController,public file:File, public actionSheetController:ActionSheetController, public userService : UsersService,public camera:Camera, public loader:LoadingController, public toastController: ToastController,public router: Router,public events : Events, public formBuilder:FormBuilder) 
+  constructor(public alertController: AlertController,public file:File, public actionSheetController:ActionSheetController, public userService : UsersService ,public camera:Camera, public loader:LoadingController, public toastController: ToastController,public router: Router,public events : Events, public formBuilder:FormBuilder) 
   { 
     //this.getUserProfile()
     //this.fetchUserProfile()
